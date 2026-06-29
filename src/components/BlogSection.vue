@@ -3,7 +3,7 @@
     <h2 class="section-title">博客文章</h2>
     <div class="space-y-3">
       <a
-        v-for="p in posts"
+        v-for="p in blogPosts"
         :key="p.title"
         :href="p.url"
         target="_blank"

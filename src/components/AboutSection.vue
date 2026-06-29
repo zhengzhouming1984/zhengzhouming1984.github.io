@@ -7,7 +7,7 @@
         始终相信简洁的代码和优雅的设计可以创造出真正有价值的产品。
       </p>
       <div class="flex flex-wrap gap-2">
-        <span v-for="tag in tags" :key="tag" class="px-3 py-1 text-xs rounded-full border border-gray-200 dark:border-gray-800 text-gray-500 dark:text-gray-400">
+        <span v-for="tag in skills" :key="tag" class="px-3 py-1 text-xs rounded-full border border-gray-200 dark:border-gray-800 text-gray-500 dark:text-gray-400">
           {{ tag }}
         </span>
       </div>

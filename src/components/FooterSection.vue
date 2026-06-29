@@ -9,7 +9,7 @@
         >
           {{ copied ? '已复制！' : '复制邮箱' }}
         </button>
-        <a href="https://github.com/zhengzhouming1984" target="_blank" class="text-xs text-gray-400 hover:text-brand-400 transition-colors">GitHub</a>
+        <a :href="site.github" target="_blank" class="text-xs text-gray-400 hover:text-brand-400 transition-colors">GitHub</a>
         <a href="#" class="text-xs text-gray-400 hover:text-brand-400 transition-colors">RSS</a>
       </div>
     </div>
@@ -18,13 +18,14 @@
 
 <script setup>
 import { ref } from 'vue'
+import { site } from '../config.js'
 
 const year = new Date().getFullYear()
 const copied = ref(false)
 
 const copyEmail = async () => {
   try {
-    await navigator.clipboard.writeText('94711123@qq.com')
+    await navigator.clipboard.writeText(site.email)
     copied.value = true
     setTimeout(() => copied.value = false, 2000)
   } catch {

@@ -2,7 +2,7 @@
   <section class="section-container !py-12">
     <div class="flex flex-wrap gap-6 justify-center">
       <a
-        href="https://github.com/zhengzhouming1984"
+        :href="site.github"
         target="_blank"
         class="flex items-center gap-2 text-xs text-gray-400 hover:text-brand-400 transition-colors"
       >
@@ -16,3 +16,7 @@
     </div>
   </section>
 </template>
+
+<script setup>
+import { site } from '../config.js'
+</script>
