@@ -27,7 +27,7 @@
 <script setup>
 import { h } from 'vue'
 
-const name = '郑州明'
+const name = 'Zhengzhouming'
 const tagline = '全栈开发者 & AI 应用创作者。专注于构建优雅、高性能的数字产品。'
 
 // SVG icons as functional components
