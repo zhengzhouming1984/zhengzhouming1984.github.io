@@ -1,9 +1,6 @@
 <template>
   <section class="section-container pt-32 md:pt-40 pb-20">
     <div class="space-y-6">
-      <h1 class="text-4xl md:text-5xl font-bold tracking-tight">
-        <span class="text-brand-400">{{ site.author }}</span>
-      </h1>
       <p class="text-lg md:text-xl text-gray-500 dark:text-gray-400 max-w-lg leading-relaxed">
         {{ site.description }}
       </p>
