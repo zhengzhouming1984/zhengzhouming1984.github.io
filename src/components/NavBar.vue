@@ -14,10 +14,32 @@
           {{ link.label }}
         </a>
         <ThemeToggle />
+        <button
+          @click="showAvatar = true"
+          class="ml-1 cursor-pointer hover:opacity-80 transition-opacity focus:outline-none focus:ring-2 focus:ring-brand-500 rounded-full"
+          aria-label="查看头像大图"
+        >
+          <img
+            src="/avatar.jpg"
+            alt="头像"
+            class="w-8 h-8 rounded-full object-cover object-top ring-2 ring-white dark:ring-gray-800"
+          />
+        </button>
       </div>
 
       <!-- 移动端菜单按钮 -->
       <div class="flex sm:hidden items-center gap-2">
+        <button
+          @click="showAvatar = true"
+          class="cursor-pointer hover:opacity-80 transition-opacity focus:outline-none focus:ring-2 focus:ring-brand-500 rounded-full"
+          aria-label="查看头像大图"
+        >
+          <img
+            src="/avatar.jpg"
+            alt="头像"
+            class="w-8 h-8 rounded-full object-cover object-top ring-2 ring-white dark:ring-gray-800"
+          />
+        </button>
         <ThemeToggle />
         <button
           @click="isOpen = !isOpen"
@@ -49,13 +71,62 @@
         </a>
       </div>
     </div>
+
+    <!-- 头像放大灯箱 -->
+    <Teleport to="body">
+      <div
+        v-if="showAvatar"
+        class="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm"
+        @click.self="showAvatar = false"
+      >
+        <button
+          @click="showAvatar = false"
+          class="absolute top-6 right-6 p-2 rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors"
+          aria-label="关闭"
+        >
+          <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+        <div class="max-w-md w-full mx-6">
+          <img
+            src="/avatar.jpg"
+            alt="头像大图"
+            class="w-full h-auto rounded-2xl shadow-2xl"
+          />
+        </div>
+      </div>
+    </Teleport>
   </nav>
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, watch, onMounted, onUnmounted } from 'vue'
 import ThemeToggle from './ThemeToggle.vue'
 import { navLinks } from '../config.js'
 
 const isOpen = ref(false)
+const showAvatar = ref(false)
+
+const handleEscape = (e) => {
+  if (e.key === 'Escape' && showAvatar.value) {
+    showAvatar.value = false
+  }
+}
+
+watch(showAvatar, (val) => {
+  if (val) {
+    document.body.style.overflow = 'hidden'
+  } else {
+    document.body.style.overflow = ''
+  }
+})
+
+onMounted(() => {
+  document.addEventListener('keydown', handleEscape)
+})
+
+onUnmounted(() => {
+  document.removeEventListener('keydown', handleEscape)
+})
 </script>
