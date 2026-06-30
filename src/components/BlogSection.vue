@@ -7,23 +7,18 @@
         :key="p.title"
         :href="p.url"
         target="_blank"
-        class="flex items-baseline justify-between group py-2 border-b border-gray-100 dark:border-gray-900 last:border-0"
+        class="flex items-baseline justify-between group py-2 divider last:border-0"
       >
-        <span class="text-sm text-gray-700 dark:text-gray-300 group-hover:text-brand-400 transition-colors">{{ p.title }}</span>
-        <span class="text-xs text-gray-400 font-mono shrink-0 ml-4">{{ p.date }}</span>
+        <span class="text-sm group-hover:text-brand-400 transition-colors" :style="{ color: 'rgb(var(--text))' }">{{ p.title }}</span>
+        <span class="text-xs font-mono shrink-0 ml-4" :style="{ color: 'rgb(var(--text-subtle))' }">{{ p.date }}</span>
       </a>
     </div>
-    <a href="#" class="inline-block mt-8 text-xs text-gray-400 hover:text-brand-400 transition-colors">
+    <a href="#" class="inline-block mt-8 text-xs link">
       查看更多 →
     </a>
   </section>
 </template>
 
 <script setup>
-const posts = [
-  { title: '从零搭建个人 AI 语音助手', date: '2026-05', url: '#' },
-  { title: 'Vue3 + Vite 极简开发实践', date: '2026-04', url: '#' },
-  { title: 'macOS 自动化：效率提升指南', date: '2026-03', url: '#' },
-  { title: '本地 LLM 部署与调优笔记', date: '2026-02', url: '#' },
-]
+import { blogPosts } from '../config.js'
 </script>

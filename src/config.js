@@ -24,3 +24,14 @@ export const blogPosts = [
   { title: 'macOS 自动化：效率提升指南', date: '2026-03', url: '#' },
   { title: '本地 LLM 部署与调优笔记', date: '2026-02', url: '#' },
 ]
+
+export const workExperience = [
+  { company: '某科技公司', role: '前端开发工程师', period: '2023 - 至今', description: '负责AI产品前端架构设计和开发，主导Vue3组件库搭建与性能优化' },
+  { company: '某互联网企业', role: '全栈开发工程师', period: '2021 - 2023', description: '参与电商平台前后端开发，负责订单系统模块设计与实现' },
+  { company: '某初创工作室', role: 'Python后端开发', period: '2019 - 2021', description: '负责数据处理流水线与API服务开发，参与LLM应用原型验证' },
+]
+
+export const education = [
+  { school: 'XX大学', degree: '计算机科学 本科', period: '2015 - 2019' },
+  { school: '在线自学', degree: '深度学习专项课程', period: '2022 - 2023' },
+]

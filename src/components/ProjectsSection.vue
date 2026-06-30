@@ -5,26 +5,26 @@
       <div class="w-5 h-5 border-2 border-brand-400 border-t-transparent rounded-full animate-spin"></div>
     </div>
     <div v-else-if="error" class="text-center py-8">
-      <p class="text-sm text-gray-400 mb-2">{{ error }}</p>
+      <p class="text-sm mb-2" :style="{ color: 'rgb(var(--text-muted))' }">{{ error }}</p>
       <button @click="fetchRepos" class="text-xs text-brand-400 hover:underline">重试</button>
     </div>
     <div v-else class="grid gap-4 md:grid-cols-2">
       <article
         v-for="repo in repos"
         :key="repo.id"
-        class="group p-5 rounded-xl border border-gray-200 dark:border-gray-800 hover:border-brand-400/30 transition-colors"
+        class="group card card-hover"
       >
         <div class="flex items-center gap-2 mb-2">
-          <svg class="w-4 h-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <svg class="w-4 h-4" :style="{ color: 'rgb(var(--text-subtle))' }" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
           </svg>
-          <h3 class="font-medium text-sm">{{ repo.name }}</h3>
+          <h3 class="font-medium text-sm" :style="{ color: 'rgb(var(--text))' }">{{ repo.name }}</h3>
         </div>
-        <p class="text-xs text-gray-500 dark:text-gray-400 leading-relaxed mb-3">
+        <p class="text-xs leading-relaxed mb-3" :style="{ color: 'rgb(var(--text-muted))' }">
           {{ repo.description || '暂无描述' }}
         </p>
         <div class="flex items-center justify-between">
-          <div class="flex items-center gap-3 text-xs text-gray-400">
+          <div class="flex items-center gap-3 text-xs" :style="{ color: 'rgb(var(--text-subtle))' }">
             <span v-if="repo.language" class="flex items-center gap-1">
               <span class="w-2 h-2 rounded-full" :style="{ backgroundColor: langColor(repo.language) }"></span>
               {{ repo.language }}
@@ -36,7 +36,7 @@
               {{ repo.stargazers_count }}
             </span>
           </div>
-          <a :href="repo.html_url" target="_blank" class="text-xs text-gray-400 hover:text-brand-400 transition-colors">查看源码</a>
+          <a :href="repo.html_url" target="_blank" class="text-xs link">查看源码</a>
         </div>
       </article>
     </div>
@@ -44,7 +44,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 
 const GITHUB_USER = 'zhengzhouming1984'
 const CACHE_KEY = 'gh_repos_cache'
@@ -106,8 +106,10 @@ async function fetchRepos() {
     return
   }
 
+  const controller = new AbortController()
+
   try {
-    const res = await fetch(`https://api.github.com/users/${GITHUB_USER}/repos?sort=updated&per_page=6&type=owner`)
+    const res = await fetch(`https://api.github.com/users/${GITHUB_USER}/repos?sort=updated&per_page=6&type=owner`, { signal: controller.signal })
     if (!res.ok) throw new Error(res.status === 403 ? 'GitHub API 速率限制，请稍后重试' : '获取仓库失败')
     const data = await res.json()
     repos.value = (data || []).filter(r => !r.fork)
@@ -120,4 +122,10 @@ async function fetchRepos() {
 }
 
 onMounted(fetchRepos)
+
+onUnmounted(() => {
+  if (fetchController) {
+    fetchController.abort()
+  }
+})
 </script>

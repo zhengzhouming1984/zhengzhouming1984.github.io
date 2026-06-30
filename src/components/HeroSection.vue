@@ -1,7 +1,15 @@
 <template>
-  <section class="section-container pt-32 md:pt-40 pb-20">
-    <div class="space-y-6">
-      <p class="text-lg md:text-xl text-gray-500 dark:text-gray-400 max-w-lg leading-relaxed">
+  <section class="section-container pt-32 md:pt-40 pb-20 relative overflow-hidden">
+    <!-- 渐变光晕背景 -->
+    <div class="hero-glow hero-glow-1"></div>
+    <div class="hero-glow hero-glow-2"></div>
+    <div class="hero-glow hero-glow-3"></div>
+
+    <!-- 点阵网格 -->
+    <div class="absolute inset-0 dot-grid text-gray-500/20 dark:text-gray-400/10"></div>
+
+    <div class="relative z-10 space-y-6">
+      <p class="text-lg md:text-xl max-w-lg leading-relaxed" :style="{ color: 'rgb(var(--text-muted))' }">
         {{ site.description }}
       </p>
       <div class="flex flex-wrap gap-3 pt-2">
@@ -11,7 +19,10 @@
           :href="link.href"
           target="_blank"
           rel="noopener"
-          class="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm border border-gray-200 dark:border-gray-800 text-gray-600 dark:text-gray-400 hover:text-brand-400 hover:border-brand-400/50 transition-colors"
+          class="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm border transition-colors"
+          :style="{ borderColor: 'rgb(var(--border))', color: 'rgb(var(--text-muted))' }"
+          @mouseenter="(e) => { e.currentTarget.style.color = 'rgb(var(--brand-400))'; e.currentTarget.style.borderColor = 'rgb(var(--brand-400) / 0.5)' }"
+          @mouseleave="(e) => { e.currentTarget.style.color = 'rgb(var(--text-muted))'; e.currentTarget.style.borderColor = 'rgb(var(--border))' }"
         >
           <component :is="link.icon" class="w-4 h-4" />
           {{ link.label }}
@@ -32,7 +43,7 @@ const IconBlog = { render: () => h('svg', { class: 'w-4 h-4', fill: 'none', view
 
 const socials = [
   { label: 'GitHub', href: site.github, icon: IconGitHub },
-  { label: '邮箱', href: '#contact', icon: IconMail, copy: site.email },
+  { label: '邮箱', href: `mailto:${site.email}`, icon: IconMail },
   { label: '博客', href: '#blog', icon: IconBlog },
 ]
 </script>
