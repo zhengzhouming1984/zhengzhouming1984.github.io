@@ -28,7 +28,9 @@
         <StatsSection />
       </main>
       <FooterSection />
+      <ScrollToTop />
     </template>
+    <ParticleBackground />
   </div>
 </template>
 

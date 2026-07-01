@@ -45,6 +45,7 @@
 
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
+import Card3D from './Card3D.vue'
 
 const GITHUB_USER = 'zhengzhouming1984'
 const CACHE_KEY = 'gh_repos_cache'

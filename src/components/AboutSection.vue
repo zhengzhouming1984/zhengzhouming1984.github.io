@@ -6,11 +6,7 @@
         我是 Zhengzhouming，一名热爱技术的全栈开发者，专注于 AI 应用、前端工程化和多媒体创作。
         始终相信简洁的代码和优雅的设计可以创造出真正有价值的产品。
       </p>
-      <div class="flex flex-wrap gap-2">
-        <span v-for="tag in skills" :key="tag" class="tag">
-          {{ tag }}
-        </span>
-      </div>
+      <SkillBars />
     </div>
 
     <!-- 工作经历时间线 -->
