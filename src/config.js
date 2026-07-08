@@ -1,7 +1,7 @@
 export const site = {
   title: '个人主页',
   description: '全栈开发者 & AI 应用创作者。专注于构建优雅、高性能的数字产品。',
-  author: 'Zhengzhouming',
+  author: '',
   email: '94711123@qq.com',
   github: 'https://github.com/zhengzhouming1984',
 }
@@ -19,10 +19,10 @@ export const skills = [
 ]
 
 export const blogPosts = [
-  { title: '从零搭建个人 AI 语音助手', date: '2026-05', url: '#' },
-  { title: 'Vue3 + Vite 极简开发实践', date: '2026-04', url: '#' },
-  { title: 'macOS 自动化：效率提升指南', date: '2026-03', url: '#' },
-  { title: '本地 LLM 部署与调优笔记', date: '2026-02', url: '#' },
+  { title: '从零搭建个人 AI 语音助手', date: '2026-05', url: '#', summary: '基于 Whisper + ChatTTS 打造本地语音交互系统' },
+  { title: 'Vue3 + Vite 极简开发实践', date: '2026-04', url: '#', summary: '从项目初始化到部署上线的完整工作流' },
+  { title: 'macOS 自动化：效率提升指南', date: '2026-03', url: '#', summary: 'AppleScript、Shortcut 与 CLI 工具的组合拳' },
+  { title: '本地 LLM 部署与调优笔记', date: '2026-02', url: '#', summary: 'Ollama + vLLM 本地大模型部署经验总结' },
 ]
 
 export const workExperience = [

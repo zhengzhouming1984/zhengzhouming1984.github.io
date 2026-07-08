@@ -1,10 +1,10 @@
 <template>
-  <div class="min-h-screen transition-colors duration-300 relative overflow-hidden" :style="{ background: 'rgb(var(--surface))' }">
+  <div class="min-h-screen transition-colors duration-300 relative overflow-hidden" :style="{ background: 'transparent' }">
     <!-- 渐变光晕背景 -->
     <div class="fixed inset-0 -z-10">
-      <div class="absolute top-[-20%] left-[-10%] w-[50vw] h-[50vw] rounded-full blur-[120px] animate-float-slow" :style="{ background: 'rgb(var(--glow-primary) / 0.08)' }"></div>
-      <div class="absolute bottom-[-20%] right-[-10%] w-[50vw] h-[50vw] rounded-full blur-[120px] animate-float-slow" style="animation-delay: -4s" :style="{ background: 'rgb(var(--glow-secondary) / 0.08)' }"></div>
-      <div class="absolute top-[40%] left-[50%] w-[30vw] h-[30vw] rounded-full blur-[100px] animate-float-slow" style="animation-delay: -2s" :style="{ background: 'rgb(var(--glow-tertiary) / 0.06)' }"></div>
+      <div class="absolute top-[-20%] left-[-10%] w-[55vw] h-[55vw] rounded-full blur-[120px] animate-float-slow" :style="{ background: 'rgb(var(--glow-primary) / 0.18)' }"></div>
+      <div class="absolute bottom-[-20%] right-[-10%] w-[55vw] h-[55vw] rounded-full blur-[120px] animate-float-slow" style="animation-delay: -4s" :style="{ background: 'rgb(var(--glow-secondary) / 0.15)' }"></div>
+      <div class="absolute top-[40%] left-[50%] w-[35vw] h-[35vw] rounded-full blur-[100px] animate-float-slow" style="animation-delay: -2s" :style="{ background: 'rgb(var(--glow-tertiary) / 0.12)' }"></div>
     </div>
     <!-- 点阵网格 -->
     <div class="dot-grid fixed inset-0 -z-10 opacity-30" :style="{ color: 'rgb(var(--text-muted) / 0.15)' }"></div>

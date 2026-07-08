@@ -1,8 +1,8 @@
 <template>
-  <span class="typewriter-wrapper">
+  <p class="text-lg md:text-xl max-w-xl leading-relaxed">
     <span ref="textEl" class="typewriter-text" :style="{ color: 'rgb(var(--text-muted))' }"></span>
-    <span class="typewriter-cursor" :class="{ blink: done }" :style="{ background: 'rgb(var(--brand-400))' }"></span>
-  </span>
+    <span class="typewriter-cursor" :class="{ blink: started }" :style="{ background: 'rgb(var(--brand-400))' }"></span>
+  </p>
 </template>
 
 <script setup>
@@ -14,23 +14,22 @@ const props = defineProps({
 })
 
 const textEl = ref(null)
-const done = ref(false)
+const started = ref(false)
 let timer = null
 let idx = 0
 
 function type() {
   if (!textEl.value) return
+  started.value = true
   if (idx < props.text.length) {
     textEl.value.textContent += props.text[idx]
     idx++
-    timer = setTimeout(type, props.speed + (Math.random() * 40 - 20))
-  } else {
-    done.value = true
+    timer = setTimeout(type, props.speed + (Math.random() * 30 - 15))
   }
 }
 
 onMounted(() => {
-  timer = setTimeout(type, 300)
+  timer = setTimeout(type, 500)
 })
 
 onUnmounted(() => {
@@ -39,15 +38,10 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
-.typewriter-wrapper {
-  display: inline;
-  position: relative;
-}
-
 .typewriter-cursor {
   display: inline-block;
   width: 2px;
-  height: 1.1em;
+  height: 1.15em;
   vertical-align: text-bottom;
   margin-left: 1px;
   border-radius: 1px;

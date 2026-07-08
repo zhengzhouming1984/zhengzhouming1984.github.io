@@ -1,25 +1,47 @@
 <template>
-  <div class="skill-bars">
-    <div
-      v-for="(skill, idx) in skillItems"
-      :key="skill.name"
-      ref="barRefs"
-      class="skill-bar-item"
-      :class="{ 'is-visible': skill.visible }"
-    >
-      <div class="skill-bar-header">
-        <span class="skill-bar-label" :style="{ color: 'rgb(var(--text-muted))' }">{{ skill.name }}</span>
-        <span class="skill-bar-pct" :style="{ color: 'rgb(var(--text-subtle))' }">{{ skill.displayPct }}%</span>
-      </div>
-      <div class="skill-bar-track" :style="{ background: 'rgb(var(--border))' }">
-        <div
-          class="skill-bar-fill"
-          :style="{
-            width: skill.visible ? skill.level + '%' : '0%',
-            background: skill.gradient,
-            transition: `width ${0.8 + idx * 0.12}s cubic-bezier(0.22, 1, 0.36, 1)`
-          }"
-        ></div>
+  <div>
+    <!-- 标签云 -->
+    <div class="flex flex-wrap gap-2 mb-6">
+      <span
+        v-for="(skill, idx) in skillItems"
+        :key="skill.name"
+        class="skill-tag"
+        :class="{ 'is-visible': skill.visible }"
+        :style="{
+          opacity: skill.visible ? 1 : 0,
+          transform: skill.visible ? 'translateY(0)' : 'translateY(8px)',
+          transitionDelay: `${idx * 60}ms`,
+        }"
+      >
+        <span class="skill-tag-dot"
+          :style="{ background: skill.gradient }"></span>
+        {{ skill.name }}
+      </span>
+    </div>
+
+    <!-- 进度条 -->
+    <div class="skill-bars">
+      <div
+        v-for="(skill, idx) in skillItems.slice(0, 6)"
+        :key="skill.name"
+        ref="barRefs"
+        class="skill-bar-item"
+        :class="{ 'is-visible': skill.visible }"
+      >
+        <div class="skill-bar-header">
+          <span class="skill-bar-label" :style="{ color: 'rgb(var(--text-muted))' }">{{ skill.name }}</span>
+          <span class="skill-bar-pct" :style="{ color: 'rgb(var(--text-subtle))' }">{{ skill.displayPct }}%</span>
+        </div>
+        <div class="skill-bar-track" :style="{ background: 'rgb(var(--border))' }">
+          <div
+            class="skill-bar-fill"
+            :style="{
+              width: skill.visible ? skill.level + '%' : '0%',
+              background: skill.gradient,
+              transition: `width ${0.8 + idx * 0.12}s cubic-bezier(0.22, 1, 0.36, 1)`
+            }"
+          ></div>
+        </div>
       </div>
     </div>
   </div>
@@ -64,14 +86,13 @@ onMounted(() => {
         const idx = Number(entry.target.dataset.index)
         if (!isNaN(idx) && skillItems.value[idx]) {
           skillItems.value[idx].visible = true
-          animateNumber(idx)
+          if (idx < 6) animateNumber(idx)
         }
         observer.unobserve(entry.target)
       }
     }
   }, { threshold: 0.2 })
 
-  // Observe after next tick (refs populated)
   requestAnimationFrame(() => {
     if (barRefs.value) {
       barRefs.value.forEach((el, i) => {
@@ -101,6 +122,33 @@ function animateNumber(idx) {
 </script>
 
 <style scoped>
+.skill-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  font-size: 0.8rem;
+  border-radius: 9999px;
+  border: 1px solid rgb(var(--border));
+  background: rgb(var(--surface-elevated));
+  color: rgb(var(--text-muted));
+  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  cursor: default;
+}
+
+.skill-tag:hover {
+  border-color: rgb(var(--brand-400) / 0.4);
+  color: rgb(var(--text));
+  box-shadow: 0 0 16px -4px rgb(var(--brand-400) / 0.2);
+}
+
+.skill-tag-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
 .skill-bars {
   display: flex;
   flex-direction: column;
@@ -134,9 +182,5 @@ function animateNumber(idx) {
   border-radius: 3px;
   will-change: width;
   width: 0;
-}
-
-.skill-bar-item.is-visible .skill-bar-fill {
-  width: var(--target-width, 0%);
 }
 </style>
