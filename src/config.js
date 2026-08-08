@@ -1,7 +1,7 @@
 export const site = {
   title: '个人主页',
   description: '全栈开发者 & AI 应用创作者。专注于构建优雅、高性能的数字产品。',
-  author: 'Zhengzhouming',
+  author: '',
   email: '94711123@qq.com',
   github: 'https://github.com/zhengzhouming1984',
 }
@@ -34,4 +34,43 @@ export const workExperience = [
 export const education = [
   { school: 'XX大学', degree: '计算机科学 本科', period: '2015 - 2019' },
   { school: '在线自学', degree: '深度学习专项课程', period: '2022 - 2023' },
+]
+
+export const featuredProjects = [
+  {
+    name: '词根词缀学习台',
+    description: '基于词根词缀拆解的英语单词学习工具，支持每日学习、复习打卡、生词本，PWA 离线可用。',
+    demo: 'https://zhengzhouming1984.github.io/vocab-workbench/',
+    source: 'https://github.com/zhengzhouming1984/vocab-workbench',
+    tags: ['HTML', 'PWA', '教育'],
+    icon: 'book',
+    color: '#52 211 153',
+  },
+  {
+    name: '恐龙跑酷',
+    description: '像素风跑酷小游戏，支持二段跳、滑铲、难度选择、皮肤切换、道具系统和生命值。',
+    demo: 'https://zhengzhouming1984.github.io/games/dino.html',
+    source: 'https://github.com/zhengzhouming1984/games',
+    tags: ['HTML', 'Canvas', '游戏'],
+    icon: 'dino',
+    color: '#251 146 60',
+  },
+  {
+    name: '霓虹打砖块',
+    description: '霓虹风格打砖块游戏，3 条命机制，含爆炸特效、闪白反馈和 LIFE LOST 提示。',
+    demo: 'https://zhengzhouming1984.github.io/games/breakout.html',
+    source: 'https://github.com/zhengzhouming1984/games',
+    tags: ['HTML', 'Canvas', '游戏'],
+    icon: 'blocks',
+    color: '#168 85 247',
+  },
+  {
+    name: '霓虹猎手',
+    description: '霓虹风格射击游戏，操控战机消灭敌人，炫酷视觉效果。',
+    demo: 'https://zhengzhouming1984.github.io/games/shooter.html',
+    source: 'https://github.com/zhengzhouming1984/games',
+    tags: ['HTML', 'Canvas', '游戏'],
+    icon: 'shooter',
+    color: '#236 72 153',
+  },
 ]

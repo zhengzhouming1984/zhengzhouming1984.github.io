@@ -2,7 +2,7 @@
   <nav class="fixed top-0 left-0 right-0 z-50 backdrop-blur-md border-b"
     :style="{ background: 'rgb(var(--surface) / 0.8)', borderColor: 'rgb(var(--border) / 0.5)' }">
     <div class="max-w-3xl mx-auto px-6 h-14 flex items-center justify-between">
-      <span class="font-mono text-sm text-brand-500 font-medium">~/</span>
+      <span class="nav-logo font-mono text-sm font-medium">~/</span>
 
       <!-- 桌面端导航 -->
       <div class="hidden sm:flex items-center gap-1">

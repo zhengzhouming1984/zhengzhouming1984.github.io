@@ -2,6 +2,7 @@
   <div
     ref="cardRef"
     class="card-3d"
+    :class="{ 'card-3d--flat': isMobile }"
     @mousemove="onMouseMove"
     @mouseenter="onMouseEnter"
     @mouseleave="onMouseLeave"
@@ -32,10 +33,16 @@ if (typeof window !== 'undefined') {
 
 const TILT_AMOUNT = isMobile.value ? 3 : 8
 
-const transformStyle = computed(() => ({
-  transform: `perspective(800px) rotateX(${rotateX.value}deg) rotateY(${rotateY.value}deg)`,
-  transition: isHovering.value ? 'transform 0.1s ease-out' : 'transform 0.4s ease-out'
-}))
+const transformStyle = computed(() => {
+  // 移动端完全禁用 3D transform，避免 click 命中测试偏移导致链接点不中
+  if (isMobile.value) {
+    return { transform: 'none' }
+  }
+  return {
+    transform: `perspective(800px) rotateX(${rotateX.value}deg) rotateY(${rotateY.value}deg)`,
+    transition: isHovering.value ? 'transform 0.1s ease-out' : 'transform 0.4s ease-out'
+  }
+})
 
 const shineStyle = computed(() => ({
   background: `radial-gradient(circle at ${shineX.value}% ${shineY.value}%, rgba(var(--brand-400) / 0.12) 0%, transparent 60%)`,
@@ -94,6 +101,12 @@ function onTouchEnd() {
 .card-3d {
   transform-style: preserve-3d;
   -webkit-tap-highlight-color: transparent;
+}
+
+/* 移动端：取消 3D 上下文，确保链接点击命中准确 */
+.card-3d--flat,
+.card-3d--flat .card-3d-inner {
+  transform-style: flat;
 }
 
 .card-3d-inner {

@@ -137,6 +137,6 @@ function animateNumber(idx) {
 }
 
 .skill-bar-item.is-visible .skill-bar-fill {
-  width: var(--target-width, 0%);
+  /* width 由内联 style 控制，这里只做视觉增强 */
 }
 </style>

@@ -7,7 +7,7 @@
         :key="p.title"
         :href="p.url"
         target="_blank"
-        class="flex items-baseline justify-between group py-2 divider last:border-0"
+        class="blog-item flex items-baseline justify-between group"
       >
         <span class="text-sm group-hover:text-brand-400 transition-colors" :style="{ color: 'rgb(var(--text))' }">{{ p.title }}</span>
         <span class="text-xs font-mono shrink-0 ml-4" :style="{ color: 'rgb(var(--text-subtle))' }">{{ p.date }}</span>
