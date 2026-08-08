@@ -126,6 +126,12 @@ function langColor(lang) {
   return langColors[lang] || '#8b8b8b'
 }
 
+function formatDate(dateStr) {
+  if (!dateStr) return ''
+  const d = new Date(dateStr)
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`
+}
+
 function getCached() {
   try {
     const raw = localStorage.getItem(CACHE_KEY)
@@ -147,6 +153,8 @@ function setCache(data) {
   } catch { /* quota exceeded, skip */ }
 }
 
+let fetchController = null
+
 async function fetchRepos() {
   loading.value = true
   error.value = ''
@@ -158,10 +166,10 @@ async function fetchRepos() {
     return
   }
 
-  const controller = new AbortController()
+  fetchController = new AbortController()
 
   try {
-    const res = await fetch(`https://api.github.com/users/${GITHUB_USER}/repos?sort=updated&per_page=6&type=owner`, { signal: controller.signal })
+    const res = await fetch(`https://api.github.com/users/${GITHUB_USER}/repos?sort=updated&per_page=6&type=owner`, { signal: fetchController.signal })
     if (!res.ok) throw new Error(res.status === 403 ? 'GitHub API 速率限制，请稍后重试' : '获取仓库失败')
     const data = await res.json()
     repos.value = (data || []).filter(r => !r.fork)
