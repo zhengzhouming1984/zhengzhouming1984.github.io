@@ -8,23 +8,77 @@
     <!-- 点阵网格 -->
     <div class="absolute inset-0 dot-grid" :style="{ color: 'rgb(var(--text-muted) / 0.08)' }"></div>
 
-    <div class="relative z-10 space-y-6">
-      <h1 class="hero-title">{{ site.author }}</h1>
-      <p class="text-lg md:text-xl max-w-lg leading-relaxed" :style="{ color: 'rgb(var(--text-muted))' }">
-        {{ site.description }}
-      </p>
-      <div class="flex flex-wrap gap-3 pt-2">
-        <a
-          v-for="link in socials"
-          :key="link.label"
-          :href="link.href"
-          target="_blank"
-          rel="noopener"
-          class="btn-gradient inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-medium transition-all hover:scale-105 active:scale-100"
-        >
-          <component :is="link.icon" class="w-4 h-4" />
-          {{ link.label }}
-        </a>
+    <div class="relative z-10">
+      <!-- 主内容区：左侧文字 + 右侧头像 -->
+      <div class="flex flex-col md:flex-row items-start md:items-center gap-8 md:gap-12">
+        <div class="flex-1 space-y-6">
+          <!-- 状态标签 -->
+          <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border text-xs"
+            :style="{ borderColor: 'rgb(var(--border))', background: 'rgb(var(--surface-elevated))' }">
+            <span class="relative flex h-2 w-2">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75"
+                :style="{ background: 'rgb(var(--brand-400))' }"></span>
+              <span class="relative inline-flex rounded-full h-2 w-2"
+                :style="{ background: 'rgb(var(--brand-400))' }"></span>
+            </span>
+            <span :style="{ color: 'rgb(var(--text-muted))' }">Available for work</span>
+          </div>
+
+          <!-- 名字 + 简介 -->
+          <div class="space-y-3">
+            <h1 class="hero-title">{{ site.author || 'Zhengzhouming' }}</h1>
+            <p class="text-lg md:text-xl max-w-lg leading-relaxed" :style="{ color: 'rgb(var(--text-muted))' }">
+              {{ site.description }}
+            </p>
+          </div>
+
+          <!-- 社交按钮 -->
+          <div class="flex flex-wrap gap-3 pt-2">
+            <a
+              v-for="link in socials"
+              :key="link.label"
+              :href="link.href"
+              target="_blank"
+              rel="noopener"
+              class="btn-gradient inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-medium transition-all hover:scale-105 hover:shadow-lg hover:shadow-brand-500/20 active:scale-100"
+            >
+              <component :is="link.icon" class="w-4 h-4" />
+              {{ link.label }}
+            </a>
+          </div>
+        </div>
+
+        <!-- 右侧头像区域 -->
+        <div class="flex-shrink-0 hidden md:block">
+          <div class="relative group cursor-pointer" @click="showAvatar = true">
+            <!-- 头像外圈光环 -->
+            <div class="absolute -inset-1.5 rounded-full opacity-60 blur-md group-hover:opacity-80 transition-opacity duration-500"
+              :style="{ background: 'conic-gradient(from 0deg, rgb(var(--brand-400)), rgb(var(--glow-secondary)), rgb(var(--glow-tertiary)), rgb(var(--brand-400)))' }">
+            </div>
+            <div class="relative rounded-full p-[3px]"
+              :style="{ background: 'linear-gradient(135deg, rgb(var(--brand-400)), rgb(var(--glow-secondary)), rgb(var(--glow-tertiary)))' }">
+              <picture>
+                <source srcset="/avatar.webp" type="image/webp">
+                <img src="/avatar.jpg" alt="头像"
+                  class="w-36 h-36 rounded-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                  width="1773" height="2364" />
+              </picture>
+            </div>
+            <!-- 装饰元素 -->
+            <div class="absolute -top-2 -right-2 w-6 h-6 rounded-full flex items-center justify-center text-xs"
+              :style="{ background: 'rgb(var(--surface-elevated))', border: '1px solid rgb(var(--border))' }">
+              <span class="text-sm">👋</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 快速统计条 -->
+      <div class="mt-12 pt-8 border-t flex flex-wrap gap-8 md:gap-12" :style="{ borderColor: 'rgb(var(--border-muted))' }">
+        <div v-for="stat in quickStats" :key="stat.label" class="flex items-center gap-2">
+          <span class="text-xl md:text-2xl font-bold font-mono" :style="{ color: 'rgb(var(--text))' }">{{ stat.value }}</span>
+          <span class="text-xs" :style="{ color: 'rgb(var(--text-subtle))' }">{{ stat.label }}</span>
+        </div>
       </div>
     </div>
 

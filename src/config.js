@@ -1,7 +1,7 @@
 export const site = {
   title: '个人主页',
   description: '全栈开发者 & AI 应用创作者。专注于构建优雅、高性能的数字产品。',
-  author: '',
+  author: 'Zhengzhouming',
   email: '94711123@qq.com',
   github: 'https://github.com/zhengzhouming1984',
 }
