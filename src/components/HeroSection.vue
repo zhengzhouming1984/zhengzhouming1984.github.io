@@ -24,13 +24,11 @@
             <span :style="{ color: 'rgb(var(--text-muted))' }">Available for work</span>
           </div>
 
-          <!-- 名字 + 简介 -->
-          <div class="space-y-3">
-            <h1 class="hero-title">{{ site.author || 'Zhengzhouming' }}</h1>
-            <p class="text-lg md:text-xl max-w-lg leading-relaxed" :style="{ color: 'rgb(var(--text-muted))' }">
-              {{ site.description }}
-            </p>
-          </div>
+          <!-- 简介 -->
+          <h1 class="text-lg md:text-xl max-w-lg leading-relaxed font-medium"
+            :style="{ color: 'rgb(var(--text))' }">
+            {{ site.description }}
+          </h1>
 
           <!-- 社交按钮 -->
           <div class="flex flex-wrap gap-3 pt-2">
